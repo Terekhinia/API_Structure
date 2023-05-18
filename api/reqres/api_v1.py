@@ -1,10 +1,10 @@
 """Модуль содержит класс и методы с Api ручками"""
 
-from .testdata import TestData
+from common import Common
 from ..api_requests import Request
+import logging
 
-
-class ApiV1(TestData):
+class ApiV1(Common):
     """Класс по работе с API"""
 
     def __init__(self):
@@ -23,7 +23,10 @@ class ApiV1(TestData):
         url = f'{self.url}/api/users/{id_user}'
         # params = {'page': id_user}
 
-        return Request().custom_request(method='GET', url=url)
+        response = Request().custom_request(method='GET', url=url)
+        logging.info(print(f'{response.request.url=}'), print(f'{response.status_code=}'), print(f'{response.text=}'))
+        return response
+
 
     def post_api_created_users(self, data):
         """Пример ручки: https://reqres.in/api/users/

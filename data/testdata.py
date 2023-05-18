@@ -3,9 +3,6 @@
 
 class TestData:
 
-    # базовый url
-    BASE_URL = 'https://reqres.in'
-
     # список имен и фамилий тестовых юзеров
     LAST_NAME = {2: "Weaver", 3: "Wong"}
     FIRST_NAME = {2: "Janet", 3: "Emma"}
@@ -17,8 +14,8 @@ class TestData:
 
     # тело запроса для создания нового юзера
     def body_request(self, id_user):
-        BODY = {"username": self.USERNAME[id_user], "email": self.JOB[id_user]}
-        return BODY
+        body = {"username": self.USERNAME[id_user], "email": self.JOB[id_user]}
+        return body
 
 
 

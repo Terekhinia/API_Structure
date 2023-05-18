@@ -1,7 +1,7 @@
 """Пример позитивного теста через фикстуру"""
 import pytest
-import jsonpath
 import json
+
 
 @pytest.mark.parametrize('id_user',
                          [2,
@@ -17,20 +17,15 @@ def test_get_reqest_user(base, id_user):
     # Шаг 1. Запрос к апи
     response = base.api_v1.get_api_users(id_user=id_user)
 
-    print(f'{response.request.url=}')
-    print(f'{response.status_code=}')
-    print(f'{response.text=}')
-
     # Шаг 2. Проверка статус кода
     base.asserts.check_status_code(status_code=response.status_code, exp_status_code=200)
 
     # Шаг 3. Проверка тела ответа
     first_name = base.testdata.FIRST_NAME[id_user]
     last_name = base.testdata.LAST_NAME[id_user]
-    response_text = json.loads(response.text)
-    response_id = jsonpath.jsonpath(response_text, '$.data.id')[0]
-    response_last_name = jsonpath.jsonpath(response_text, '$.data.last_name')[0]
-    response_first_name = jsonpath.jsonpath(response_text, '$.data.first_name')[0]
+    response_id = base.functions.jsonpath(response=response, value="data.id")
+    response_last_name = base.functions.jsonpath(response=response, value="data.last_name")
+    response_first_name = base.functions.jsonpath(response=response, value="data.first_name")
     base.asserts.check_id_users(response_id, id_user)
     base.asserts.check_name_users(response_last_name, last_name)
     base.asserts.check_name_users(response_first_name, first_name)
@@ -52,10 +47,6 @@ def test_post_create_user1(base):
     # Шаг 1. Запрос к апи
     body = base.testdata.body_request(number_user)
     response = base.api_v1.post_api_created_users(data=body)
-
-    print(f'{response.request.url=}')
-    print(f'{response.status_code=}')
-    print(f'{response.text=}')
 
     # Шаг 2. Проверка статус кода
     base.asserts.check_status_code(status_code=response.status_code, exp_status_code=201)
@@ -85,10 +76,6 @@ def test_put_chains_user1(base):
     # Шаг 1. Запрос к апи
     body = base.testdata.body_request(number_user)
     response = base.api_v1.put_api_chains_users(data=body, id=number_user)
-
-    print(f'{response.request.url=}')
-    print(f'{response.status_code=}')
-    print(f'{response.text=}')
 
     # Шаг 2. Проверка статус кода
     base.asserts.check_status_code(status_code=response.status_code, exp_status_code=200)
