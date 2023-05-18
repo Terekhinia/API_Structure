@@ -54,9 +54,8 @@ def test_post_create_user1(base):
     # Шаг 3. Проверка тела ответа
     username = base.testdata.USERNAME[number_user]
     email = base.testdata.JOB[number_user]
-    response_text = json.loads(response.text)
-    response_username = response_text["username"]
-    response_email = response_text["email"]
+    response_username = base.functions.jsonpath(response=response, value="username")
+    response_email = base.functions.jsonpath(response=response, value="email")
     base.asserts.check_name_users(response_username, username)
     base.asserts.check_name_users(response_email, email)
 
@@ -83,8 +82,7 @@ def test_put_chains_user1(base):
     # Шаг 3. Проверка тела ответа
     username = base.testdata.USERNAME[number_user]
     email = base.testdata.JOB[number_user]
-    response_text = json.loads(response.text)
-    response_username = response_text["username"]
-    response_email = response_text["email"]
+    response_username = base.functions.jsonpath(response=response, value="username")
+    response_email = base.functions.jsonpath(response=response, value="email")
     base.asserts.check_name_users(response_username, username)
     base.asserts.check_name_users(response_email, email)
