@@ -1,5 +1,6 @@
 """Модуль с шагами по проверке"""
-
+import jsonpath
+import json
 
 class AssertApi:
     """Класс проверок для API"""
@@ -41,3 +42,26 @@ class AssertApi:
 
         msg = f'полученный name - "{response_name}" отличен от "{exp_name}"'
         assert response_name == exp_name, msg
+
+    @staticmethod
+    def check_response_jesonpath(response, data):
+        """Метод получает данные из json и сравновает с ожидаемым значением
+
+        Args:
+            response: полученная запись в формате json
+            data: ожидаемое значение в виде словаря  Прим.   data = {
+                                                                '$.data.ключ0': значение0,
+                                                                '$.data.ключ1': значение1,
+                                                                '$.data.ключN': значениеN,
+                                                                ...
+                                                            }
+        """
+        data_len = len(data)
+        for i in range(data_len):
+            data_keys = tuple(data.keys())
+            response_text = json.loads(response.text)
+            received_value = jsonpath.jsonpath(response_text, f'{data_keys[i]}')[0]
+            expected_value = data[data_keys[i]]
+            msg = f'--{i}-- полученное значение - "{received_value}" отлично от "{expected_value}"'
+            assert expected_value == received_value, msg
+

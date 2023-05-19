@@ -1,10 +1,9 @@
 """Модуль по подключению параметров"""
 
 from .reqres.api_v1 import ApiV1
-from utils.asserts import AssertApi
+from api.asserts import AssertApi
 from data.testdata import TestData
-from api.functions import Functions
-from .reqres.common import Common
+
 
 class Application:
     """Класс с подключением всех библиотек для тестирования API v1"""
@@ -12,8 +11,8 @@ class Application:
         self.api_v1 = ApiV1()
         self.asserts = AssertApi()
         self.testdata = TestData()
-        self.functions = Functions()
-        # self.common = Common()
+
+
 
 
 

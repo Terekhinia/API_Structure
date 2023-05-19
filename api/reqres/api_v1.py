@@ -2,7 +2,6 @@
 
 from .common import Common
 from ..api_requests import Request
-import logging
 
 class ApiV1(Common):
     """Класс по работе с API"""
@@ -23,9 +22,7 @@ class ApiV1(Common):
         url = f'{self.url}/api/users/{id_user}'
         # params = {'page': id_user}
 
-        response = Request().custom_request(method='GET', url=url)
-        logging.info(print(f'{response.request.url=}'), print(f'{response.status_code=}'), print(f'{response.text=}'))
-        return response
+        return Request().custom_request(method='GET', url=url)
 
 
     def post_api_created_users(self, data):

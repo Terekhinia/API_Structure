@@ -1,7 +1,7 @@
 """Модуль содержит базовый класс для отправки запросов"""
 
 import requests
-
+import logging
 
 class Request:
     """Обертка для отправки запросов"""
@@ -25,5 +25,6 @@ class Request:
         Returns:
             response: объект результата запроса
         """
-
-        return requests.request(method=method, url=url, params=params, data=data, headers=self.headers, cookies=self.cookies)
+        response = requests.request(method=method, url=url, params=params, data=data, headers=self.headers, cookies=self.cookies)
+        logging.info(print(f'--{response.request.url=}\n--{response.status_code=}\n--{response.text=}'))
+        return response
