@@ -1,6 +1,6 @@
 """Модуль содержит класс и методы с Api ручками"""
 
-from .common import Common
+from utils.common import Common
 from ..api_requests import Request
 
 class ApiV1(Common):

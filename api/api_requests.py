@@ -26,5 +26,5 @@ class Request:
             response: объект результата запроса
         """
         response = requests.request(method=method, url=url, params=params, data=data, headers=self.headers, cookies=self.cookies)
-        logging.info(print(f'--{response.request.url=}\n--{response.status_code=}\n--{response.text=}'))
+        logging.info(print(f'--{response.request.url=}\n--{response.status_code=}\n--{response.text=}\n--{response=}'))
         return response

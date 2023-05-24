@@ -59,8 +59,8 @@ class AssertApi:
         data_len = len(data)
         for i in range(data_len):
             data_keys = tuple(data.keys())
-            response_text = json.loads(response.text)
-            received_value = jsonpath.jsonpath(response_text, f'{data_keys[i]}')[0]
+            response_json = json.loads(response)
+            received_value = jsonpath.jsonpath(response_json, f'{data_keys[i]}')[0]
             expected_value = data[data_keys[i]]
             msg = f'--{i}-- полученное значение - "{received_value}" отлично от "{expected_value}"'
             assert expected_value == received_value, msg
