@@ -1,7 +1,7 @@
 import pytest
 from selenium import webdriver
 from api.application import Application
-from utils.utils1 import Utils
+from utils.utils import Utils
 
 
 @pytest.fixture(scope="session")
@@ -15,7 +15,7 @@ def browser():
 
 @pytest.fixture(scope='session')
 def base_general():
-    """Декоратор в для работы с общими данными и функциями для вэб и апи"""
+    """Декоратор для работы с общими данными и функциями для вэб и апи"""
     return Utils()
 
 

@@ -44,7 +44,7 @@ class AssertApi:
         assert response_name == exp_name, msg
 
     @staticmethod
-    def check_response_jesonpath(response, data):
+    def check_response_jsonpath(response, data):
         """Метод получает данные из json и сравновает с ожидаемым значением
 
         Args:

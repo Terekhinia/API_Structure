@@ -25,7 +25,7 @@ def test_get_reqest_user(base_api, base_general, id_user):
         '$.data.last_name': TestData.LAST_NAME[id_user],
         '$.data.first_name': TestData.FIRST_NAME[id_user]
     }
-    base_general.asserts.check_response_jesonpath(response=response.text, data=data)
+    base_general.asserts.check_response_jsonpath(response=response.text, data=data)
 
 
 def test_post_create_user1(base_api, base_general):
@@ -53,7 +53,7 @@ def test_post_create_user1(base_api, base_general):
         '$.username': TestData.USERNAME[number_user],
         '$.email': TestData.JOB[number_user]
     }
-    base_general.asserts.check_response_jesonpath(response=response.text, data=data)
+    base_general.asserts.check_response_jsonpath(response=response.text, data=data)
 
 def test_put_chains_user1(base_api):
     """Позитивный тест.
@@ -80,5 +80,5 @@ def test_put_chains_user1(base_api):
         '$.username': TestData.USERNAME[number_user],
         '$.email': TestData.JOB[number_user]
     }
-    base_api.asserts.check_response_jesonpath(response=response.text, data=data)
+    base_api.asserts.check_response_jsonpath(response=response.text, data=data)
 
