@@ -1,6 +1,6 @@
 from web.pages.request_page import RequestPage
 from utils.common import Common
-
+import logging
 
 def data_acquisition_get_api(base_api, id_user):
         # Шаг 1. Запрос к апи
@@ -17,4 +17,9 @@ def data_acquisition_get_web(browser):
         web_response = page.respons(page.RESPONS)
         return web_response
 
-
+def assert_data_acquisition(response_get_api, response_get_web):
+        api_response_str = str(response_get_api).replace(' ', '')
+        web_response_str = str(response_get_web).replace(' ', '')
+        msg = "Ответы не совпадают"
+        logging.info(print(f'--{api_response_str=}\n--{web_response_str=}'))
+        assert web_response_str == api_response_str, msg
