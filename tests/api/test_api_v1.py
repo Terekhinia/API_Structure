@@ -1,4 +1,3 @@
-"""Пример позитивного теста через фикстуру"""
 import pytest
 from utils.testdata import TestData
 
@@ -28,7 +27,9 @@ def test_get_reqest_user(base_api, base_general, id_user):
     base_general.asserts.check_response_jsonpath(response=response.text, data=data)
 
 
-def test_post_create_user1(base_api, base_general):
+@pytest.mark.parametrize('id_user',
+                         [1])
+def test_post_create_user1(base_api, base_general, id_user):
     """Позитивный тест.
 
     Шаг 1. Отправка запроса. Пример: POST https://reqres.in/api/users
@@ -39,10 +40,9 @@ def test_post_create_user1(base_api, base_general):
     Шаг 2. Проверка статус кода
     Шаг 3. Проверка тела ответа
     """
-    number_user = 1
 
     # Шаг 1. Запрос к апи
-    body = base_general.testdata.body_request(number_user)
+    body = base_general.testdata.body_request(id_user)
     response = base_api.api_v1.post_api_created_users(data=body)
 
     # Шаг 2. Проверка статус кода
@@ -50,12 +50,15 @@ def test_post_create_user1(base_api, base_general):
 
     # Шаг 3. Проверка тела ответа
     data = {
-        '$.username': TestData.USERNAME[number_user],
-        '$.email': TestData.JOB[number_user]
+        '$.username': TestData.USERNAME[id_user],
+        '$.email': TestData.JOB[id_user]
     }
     base_general.asserts.check_response_jsonpath(response=response.text, data=data)
 
-def test_put_chains_user1(base_api):
+
+@pytest.mark.parametrize('id_user',
+                         [2])
+def test_put_chains_user1(base_api, id_user):
     """Позитивный тест.
 
     Шаг 1. Отправка запроса. Пример: PUT https://reqres.in/api/users
@@ -66,19 +69,18 @@ def test_put_chains_user1(base_api):
     Шаг 2. Проверка статус кода
     Шаг 3. Проверка тела ответа
     """
-    number_user = 2
 
     # Шаг 1. Запрос к апи
-    body = base_api.testdata.body_request(number_user)
-    response = base_api.api_v1.put_api_chains_users(data=body, id=number_user)
+    body = base_api.testdata.body_request(id_user)
+    response = base_api.api_v1.put_api_chains_users(data=body, id=id_user)
 
     # Шаг 2. Проверка статус кода
     base_api.asserts.check_status_code(status_code=response.status_code, exp_status_code=200)
 
     # Шаг 3. Проверка тела ответа
     data = {
-        '$.username': TestData.USERNAME[number_user],
-        '$.email': TestData.JOB[number_user]
+        '$.username': TestData.USERNAME[id_user],
+        '$.email': TestData.JOB[id_user]
     }
     base_api.asserts.check_response_jsonpath(response=response.text, data=data)
 

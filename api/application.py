@@ -9,7 +9,6 @@ class Application:
     def __init__(self):
         self.api_v1 = ApiV1()
         self.asserts = AssertApi()
-        # self.testdata = TestData()
 
 
 

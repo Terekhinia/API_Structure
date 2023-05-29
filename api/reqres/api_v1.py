@@ -20,7 +20,6 @@ class ApiV1(Common):
         """
 
         url = f'{self.url}/api/users/{id_user}'
-        # params = {'page': id_user}
 
         return Request().custom_request(method='GET', url=url)
 
