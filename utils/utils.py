@@ -1,5 +1,5 @@
-from utils.testdata import TestData
-from utils.asserts import AssertApi
+from .testdata import TestData
+from .asserts import AssertApi
 
 
 class Utils:

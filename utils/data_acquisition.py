@@ -1,3 +1,7 @@
+"""
+Модуль содержит функции по подготовке данных для проведения теста-сравнения ответов через вэб и апи
+"""
+
 from web.pages.request_page import RequestPage
 from utils.common import Common
 import logging
